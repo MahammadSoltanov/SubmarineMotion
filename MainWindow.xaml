@@ -1,0 +1,264 @@
+﻿<Window x:Class="SubmarineMotionVisualization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SubmarineMotionVisualization"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <!--<Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>-->
+
+    <Grid Background="#363636">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="InputStackPanel"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <!--AxisX Input-->
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                x0 =
+            </Label>
+            <TextBox x:Name="XCoordinateInput"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Width="70"
+                     Text="{Binding SubmarineMotionProcess.X0, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"
+                     Margin="0 0 20 0"/>
+
+            <!--AxisY Input-->
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                y0 =
+            </Label>
+            <TextBox x:Name="YCoordinateInput"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Width="70"
+                     Text="{Binding SubmarineMotionProcess.Y0, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"
+                     Margin="0 0 20 0"/>
+
+            <!--Drag coefficient Input-->
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                k =
+            </Label>
+            <TextBox x:Name="DragCoefficientInput"
+                     VerticalContentAlignment="Center"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     VerticalAlignment="Center"
+                     Width="70"
+                     Text="{Binding SubmarineMotionProcess.DragCoefficient, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"
+                     Margin="0 0 20 0"/>
+
+            <!--Mass Input-->
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                m =
+            </Label>
+            <TextBox x:Name="MassInput"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Text="{Binding SubmarineMotionProcess.Mass, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"
+                     Width="70"/>
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0 0 0 0"
+                   Foreground="White">
+                кг
+            </Label>
+
+            <!--Volume Input-->
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                V =
+            </Label>
+            <TextBox x:Name="VolumeInput"
+                     VerticalContentAlignment="Center"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     VerticalAlignment="Center"
+                     Text="{Binding SubmarineMotionProcess.Volume, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"
+                     Width="70"/>
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0 0 0 0"
+                   Foreground="White">
+                кг/м^3
+            </Label>
+
+
+            <!--SpeedX Input-->
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                u0 =
+            </Label>
+            <TextBox x:Name="SpeedInputX"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Text="{Binding SubmarineMotionProcess.U0, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"
+                     Width="70"/>
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                м/c
+            </Label>
+
+            <!--SpeedY Input-->
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                v0 =
+            </Label>
+            <TextBox x:Name="SpeedInputY"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Text="{Binding SubmarineMotionProcess.V0, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"
+                     Width="70"/>
+            <Label VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White">
+                м/c
+            </Label>
+
+        </StackPanel>
+
+        <StackPanel x:Name="ButtonsStackPanel"
+                    Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Button 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="Azure"
+                Background="#363636"
+                Padding="5"
+                Margin="0 0 70 0"
+                Command="{Binding StartVisualizationCommand}">
+                Start visualization
+            </Button>
+            <Button
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="Azure"
+                Background="#363636"
+                Padding="5"
+                Command="{Binding StopVisualizationCommand}">
+                Stop visualization
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Row="2"
+              >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <lvc:CartesianChart Series="{Binding YAndTCollection}" 
+                                LegendLocation="Right" 
+                                Name="YandT"
+                                Margin="0 0 0 0"
+                                Width="300"
+                                Height="300"
+                                Foreground="White">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="T" MinValue="0" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Y" MaxValue="100"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+            
+            <lvc:CartesianChart Series="{Binding XAndTCollection}" 
+                                LegendLocation="Right" 
+                                Name="XandT"
+                                Margin="0 0 0 0"
+                                Grid.Column="1"
+                                Width="300"
+                                Height="300"
+                                Foreground="White">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="T" MinValue="0" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="X" MinValue="0" />
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+            <lvc:CartesianChart Series="{Binding YAndXCollection}" 
+                                LegendLocation="Right" 
+                                Name="YandX"
+                                Grid.Column="2"
+                                Width="300"
+                                Height="300"
+                                Foreground="White">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="X" MinValue="0" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Y" MaxValue="100"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+
+            <lvc:CartesianChart Series="{Binding UAndTCollection}" 
+                                LegendLocation="Right" 
+                                Name="UandT"
+                                Grid.Column="3"
+                                Width="300"
+                                Height="300"
+                                Foreground="White">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="T" MinValue="0" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="U"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+
+            <lvc:CartesianChart Series="{Binding VAndTCollection}" 
+                                LegendLocation="Right" 
+                                Name="VandT"
+                                Grid.Column="4"
+                                Width="300"
+                                Height="300"
+                                Foreground="White">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="T" MinValue="0" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="V"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
+    </Grid>
+</Window>
