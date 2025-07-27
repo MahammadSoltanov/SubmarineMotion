@@ -62,6 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ObservableObject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="SubmarineMotion.cs" />
     <Compile Include="ViewModel.cs" />
@@ -79,9 +80,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
