@@ -11,7 +11,7 @@ A simple beginner-level desktop simulation built with WPF and C#, demonstrating 
 - Emphasis on user interaction and feedback  
 
 ## 🛠️ Tech Stack
-- WPF (.NET Framework or Core depending on your setup)  
+- WPF (.NET Framework)  
 - C#  
 - MVVM (lightweight implementation)  
 - XAML for UI  
